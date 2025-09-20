@@ -9,19 +9,8 @@ interface EmergencyButtonProps {
 export const EmergencyButton: React.FC<EmergencyButtonProps> = ({ onEmergencyActivate }) => {
   const [isRecording, setIsRecording] = useState(false);
   const [isPressing, setIsPressing] = useState(false);
-  const [countdown, setCountdown] = useState<number | null>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
-
-  useEffect(() => {
-    if (countdown !== null && countdown > 0) {
-      const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
-      return () => clearTimeout(timer);
-    } else if (countdown === 0) {
-      handleEmergencyActivate();
-      setCountdown(null);
-    }
-  }, [countdown]);
 
   const startRecording = async () => {
     try {
@@ -66,15 +55,11 @@ export const EmergencyButton: React.FC<EmergencyButtonProps> = ({ onEmergencyAct
 
   const handlePress = () => {
     setIsPressing(true);
-    setCountdown(3);
     startRecording();
   };
 
   const handleRelease = () => {
     setIsPressing(false);
-    if (countdown !== null && countdown > 0) {
-      setCountdown(null);
-    }
     if (isRecording) {
       stopRecording();
     }
@@ -115,7 +100,7 @@ export const EmergencyButton: React.FC<EmergencyButtonProps> = ({ onEmergencyAct
           )}
           
           <span className="text-white text-2xl font-bold mb-2">
-            {countdown !== null && countdown > 0 ? countdown : 'SOS'}
+            SOS
           </span>
           
           <span className="text-white/90 text-sm">

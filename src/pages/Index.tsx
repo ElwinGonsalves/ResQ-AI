@@ -46,8 +46,11 @@ const Index = () => {
             </div>
             
             <h1 className="text-5xl font-bold text-foreground">
-              Emergency Response Network
+              ResQ AI
             </h1>
+            <p className="text-sm text-warning bg-warning/10 px-4 py-2 rounded-lg">
+              ⚠️ Demo Version - This is a demonstration of how the emergency response system would function
+            </p>
             
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Voice-first, multilingual, agentic disaster network that turns a victim's cry for help 
